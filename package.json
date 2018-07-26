@@ -1,0 +1,23 @@
+{
+  "name": "plan366",
+  "version": "1.0.0",
+  "description": "a web app for person or team to make a plan",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "plan",
+    "react",
+    "koa",
+    "mysql"
+  ],
+  "author": "qiuhaoxin",
+  "license": "ISC",
+  "dependencies": {
+    "class-names": "^1.0.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
+  }
+}
