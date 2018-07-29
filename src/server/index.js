@@ -3,9 +3,12 @@ const app=new Koa();
 const json=require('koa-json');
 const http=require('http');
 const bodyparser=require('koa-bodyparser');
+const logger=require('koa-logger');
 
 
-
+app.use(bodyparser({formLimit:'1mb',enableTypes:['json','form','text']}));
+app.use(json())
+app.use(logger())
 app.use(require('./controllers/userApi').routes());
 
 const PORT=process.env.port || 8099;
