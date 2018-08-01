@@ -8,7 +8,7 @@ console.log("appDirectory is "+appDirectory);
 const resolvePath=relativePath=>path.resolve(appDirectory,relativePath);
 
 module.exports={
-	appEntry:resolvePath('src/index.js'),
+	appEntry:resolvePath('src/mobile/index.js'),
 	appDist:resolvePath('dist'),
 	appHtml:resolvePath('src/public/index.html'),
 }

@@ -164,7 +164,7 @@ module.exports={
 		]
 	},
   output:{
-    path:path.resolve(__dirname,"../dist"),
+    path:path.resolve(__dirname,"../mobile/dist"),
     filename:'bundle.js',
     publicPath: "/"
   },
