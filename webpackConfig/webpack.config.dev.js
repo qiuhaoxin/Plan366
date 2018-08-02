@@ -1,7 +1,7 @@
 const webpack=require('webpack');
 const path=require('path');
 const HtmlWebpackPlugin=require('html-webpack-plugin');
-const paths=require('./paths');
+const paths=require('./path');
 const OpenBrowser=require('open-browser-webpack-plugin');
 /*
 * postcss
@@ -88,12 +88,6 @@ module.exports={
                            }),
                            postcssViewportUnits({}),
 
-                            cssnano({
-                              preset: "advanced", 
-                              autoprefixer: false, 
-                              "postcss-zindex": false 
-                            })
-
                         ]
                       } 
                     },
@@ -144,12 +138,6 @@ module.exports={
                             utf8: false
                            }),
                            postcssViewportUnits({}),
-
-                            cssnano({
-                              preset: "advanced", 
-                              autoprefixer: false, 
-                              "postcss-zindex": false 
-                            })
 
                         ]
                       } 

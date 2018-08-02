@@ -1,5 +1,4 @@
 import React,{Component} from 'react';
-import Style from './index.less';
 import PropTypes from 'prop-types';
 
 class MainPage extends Component{
