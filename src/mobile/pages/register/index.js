@@ -3,6 +3,7 @@ import Styles from './index.less';
 import PropTypes from 'prop-types';
 import {Button,Tip} from '@haoxin_qiu/reactwebcomponent';
 import {isEmpty} from '../../../utils/utils';
+import {withRouter} from 'react-router-dom';
 
 import {connect} from 'react-redux';
 import {RegisterAction} from '../../actions/userAction';
@@ -21,6 +22,11 @@ class Register extends Component{
 	componentDidMount(){
 
 	}
+  componentWillReceiveProps(nextProps){
+    if(!isEmpty(nextProps.userName) && nextProps.userName!=this.props.userName){
+       this.props.history.push('login');
+    }
+  }
   validate=()=>{
      const {name,phonenum,psw,repsw}=this.state;
      if(isEmpty(name)){
@@ -95,7 +101,7 @@ class Register extends Component{
 }
 const mapStateToProps=state=>{
   return {
-
+     userName:state.user.userName,
   }
 }
 const wrapperFunc=(payload,func,dispatch)=>{
@@ -108,4 +114,4 @@ const mapDispatchToProps=dispatch=>{
     registerUser:(payload)=>wrapperFunc(payload,RegisterAction,dispatch),
   }
 }
-export default connect(mapStateToProps,mapDispatchToProps)(Register);
+export default connect(mapStateToProps,mapDispatchToProps)(withRouter(Register));

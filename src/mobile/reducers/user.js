@@ -1,12 +1,7 @@
 
 export const initState={
-	user:{
-       userName:'',
-	},
+    userName:'',
 	loading:false,
-	mainpage:{
-
-	}
 }
 
 export const user=(state=initState,action)=>{
@@ -15,10 +10,7 @@ export const user=(state=initState,action)=>{
 		    console.log("action is "+JSON.stringify(action));
             return {
             	...state,
-            	user:{
-            		...state.user,
-            	    ...action.payload,
-            	}
+                ...action.payload,
             }
 		break;
 		case 'login':

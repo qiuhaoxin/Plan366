@@ -1,4 +1,4 @@
-import {Switch,HashRouter,Redirect,Route} from 'react-router-dom';
+import {Switch,HashRouter,Redirect,Route,withRouter} from 'react-router-dom';
 import React,{Component} from 'react';
 import asyncComponent from '../../utils/asyncComponent';
 
