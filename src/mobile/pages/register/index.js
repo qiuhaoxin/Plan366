@@ -9,12 +9,14 @@ import {RegisterAction} from '../../actions/userAction';
 class Register extends Component{
 	constructor(props){
 		super(props);
+    this.tipContent="";
 	}
   state={
     name:'',
     phonenum:'',
     psw:'',
     repsw:'',
+    showTip:false,
   }
 	componentDidMount(){
 
@@ -23,24 +25,46 @@ class Register extends Component{
      const {name,phonenum,psw,repsw}=this.state;
      if(isEmpty(name)){
         console.log("name is isEmpty");
+        this.tipContent="name is isEmpty"
+        this.setState({
+          showTip:true,
+        })
         return false;
      }
      if(isEmpty(phonenum)){
         console.log("phonenum is empty!");
-        return;
+        return false;
      }
-     if(isEmpty(psw
-      ))
-
+     if(isEmpty(psw)){
+        console.log("psw is empty！");
+        return false;
+     }
+     if(isEmpty(repsw)){
+        console.log("repsw is empty！");
+        return false;
+     }
+     if(repsw!=psw){
+        console.log("repsw and psw not equal！");
+        return false;
+     }
+    return true;
   }
   handleInputChange=(e,key)=>{
-
+    this.setState({
+      [key]:e.target.value,
+    })
   }
   handleBtnClick=()=>{
-    this.validate();
+    const {registerUser}=this.props;
+    const {psw,phonenum,name}=this.state;
+    const result=this.validate();
+    if(result){
+      registerUser({psw,phonenum,name});
+    }
     console.log("submit");
   }
 	render(){
+        const {showTip}=this.state;
         return (
            <div className={Styles.wrapper}>
               <div className={Styles.innerWrapper}>
@@ -63,7 +87,7 @@ class Register extends Component{
                 <div className={Styles.row}>
                      <Button onClick={this.handleBtnClick} type='primary'>提交</Button>
                 </div>
-                <Tip tipContent="test" visible={true} type="error"></Tip>
+                <Tip tipContent="test" visible={showTip}  type="error"></Tip>
               </div>
            </div>
         )
@@ -84,4 +108,4 @@ const mapDispatchToProps=dispatch=>{
     registerUser:(payload)=>wrapperFunc(payload,RegisterAction,dispatch),
   }
 }
-export default connect(mapStateToProps,)(Register);
+export default connect(mapStateToProps,mapDispatchToProps)(Register);

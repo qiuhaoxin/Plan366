@@ -1,7 +1,7 @@
 const REGISTER="register";
 const LOGIN="login";
 
-export default {
+export {
     REGISTER,
     LOGIN,
 }

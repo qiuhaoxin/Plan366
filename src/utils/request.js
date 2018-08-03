@@ -33,6 +33,7 @@ export default function request(url,options){
    	  //credentials:'include',
    };
    const newOptions={...defaultOptions,...options};
+   console.log("method is "+newOptions.method);
    if(newOptions.method=='POST'||newOptions.method=='PUT'){
    	  newOptions.headers={
    	  	 Accept:'application/json',
@@ -40,6 +41,7 @@ export default function request(url,options){
    	  	 ...newOptions.headers
    	  };
    	  newOptions.body=JSON.stringify(newOptions.body);
+      console.log("newOptions is "+JSON.stringify(newOptions));
    }
    return fetch(url,newOptions)
           .then(checkStatus)

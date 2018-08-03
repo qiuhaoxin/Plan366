@@ -14,6 +14,7 @@ if(REQUESTURL && REQUESTURL=='test'){
 
 //注册用户
 export function register(params){
+	console.log("params is "+JSON.stringify(params));
 	return request(postUrl+"/user/register",{
 		method:'POST',
 		body:params,

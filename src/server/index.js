@@ -2,13 +2,26 @@ const Koa=require('koa');
 const app=new Koa();
 const json=require('koa-json');
 const http=require('http');
-const bodyparser=require('koa-bodyparser');
+const bodyparser=require('koa-bodyparser')();
 const logger=require('koa-logger');
+const cors=require('koa2-cors');
+const convert=require('koa-convert');
 
 
-app.use(bodyparser({formLimit:'1mb',enableTypes:['json','form','text']}));
-app.use(json())
+
+// app.use(json())
 app.use(logger())
+app.use(cors({
+	origin:function(ctx){
+       return '*';
+	},
+	exposeHeaders:['WWW-Authenticate','Server-Authorization'],
+	maxAge:5,
+	credentials:true,
+	allowMethods:['POST','GET','OPTIONS','PUT','DELETE'],
+	allowHeaders:['Content-Type','Authorization','Accept','Content-Length','X-Request-With'],
+}))
+app.use(convert(bodyparser));
 app.use(require('./controllers/userApi').routes());
 
 const PORT=process.env.port || 8099;
