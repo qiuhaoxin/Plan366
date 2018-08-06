@@ -56,6 +56,11 @@ exports.register=(value)=>{
 	const _sql="insert into t_users set FNAME=?,FPASSWORD=?,FMOBILE=?";
 	return query(_sql,value)
 }
+//获取
+exports.findPerson=(value)=>{
+	const _sql="select * from t_users where FMOBILE=?";
+	return query(_sql,value);
+}
 //删除用户
 exports.delUser=(value)=>{
 	const  _sql=`delete from t_user where FID=${value}`;

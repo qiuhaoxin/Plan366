@@ -1,12 +1,44 @@
 const router=require('koa-router')();
-const planSql=require('../lib/sql.js');
 const SQL_API=require('../lib/sql.js');
 
 //登录
-router.get('/user/login',async (ctx,next)=>{
-	const params=ctx.query;
-	console.log("params is "+JSON.stringify(params));
-    ctx.body="hello World to qiuhaoxin";
+router.post('/user/login',async (ctx,next)=>{
+    console.log("user/login");
+    const postData=await parsePostData(ctx);
+    const phoneNum=postData['phonenum'];
+    const psw=postData['psw'];
+    console.log("phoneNum is "+phoneNum+" and psw is "+psw);
+    await SQL_API.findPerson([phoneNum]).then((res)=>{
+      console.log("res is "+JSON.stringify(res));
+      if(res && res[0]){
+         const db_psw=res[0]['FPASSWORD'];
+         if(db_psw==psw){
+            ctx.body={
+              message:'登录成功!',
+              result:1,
+              data:null
+            } 
+         }else{
+            ctx.body={
+              message:'登录失败，用户密码不匹配!',
+              result:-1,
+              data:null
+            }
+         }
+      }else{
+        ctx.body={
+          message:'登录失败，该手机用户不存在!',
+          result:-1,
+          data:null
+        }
+      }
+    }).catch(err=>{
+      ctx.body={
+        message:'异常:'+err,
+        result:-1,
+        data:null,
+      }
+    })
 })
 //注册用户
 router.post('/user/register',async (ctx,next)=>{
@@ -46,8 +78,6 @@ router.post('/user/changePsw',async(ctx,next)=>{
 router.post('/user/changePerson',async(ctx,next)=>{
 
 })
-
-
 function parsePostData( ctx ) {
   return new Promise((resolve, reject) => {
     try {

@@ -11,3 +11,13 @@ export const RegisterAction=(payload)=>{
     	}
     }
 }
+
+export const LoginAction=(payload)=>{
+	return async dispath=>{
+		const response=await login(payload);
+		console.log("response is "+JSON.stringify(response));
+		if(response && response.result==1){
+			dispath({type:ActionType.LOGIN,payload:response['data']});
+		}
+	}
+}

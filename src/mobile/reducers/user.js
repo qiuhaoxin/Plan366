@@ -1,7 +1,9 @@
 
 export const initState={
     userName:'',
+    loadStatus:0,//0：未登录 1：已登录
 	loading:false,
+	tips:'',
 }
 
 export const user=(state=initState,action)=>{
@@ -14,7 +16,10 @@ export const user=(state=initState,action)=>{
             }
 		break;
 		case 'login':
-
+            return {
+            	...state,
+                ...action.payload,
+            }
 		break;
 		case 'changePsw':
 

@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import {Button,Tip} from '@haoxin_qiu/reactwebcomponent';
 import {isEmpty} from '../../../utils/utils';
 import {withRouter} from 'react-router-dom';
+import Header from '../../components/Header';
 
 import {connect} from 'react-redux';
 import {RegisterAction} from '../../actions/userAction';
@@ -73,6 +74,7 @@ class Register extends Component{
         const {showTip}=this.state;
         return (
            <div className={Styles.wrapper}>
+              <Header midContent={"用户注册"}></Header>
               <div className={Styles.innerWrapper}>
                 <div className={Styles.row}>
                    <label>用户名:</label>
