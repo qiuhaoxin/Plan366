@@ -1,5 +1,6 @@
 const router=require('koa-router')();
 const SQL_API=require('../lib/sql.js');
+const svgCaptcha=require('svg-captcha');
 
 //登录
 router.post('/user/login',async (ctx,next)=>{
@@ -94,6 +95,14 @@ function parsePostData( ctx ) {
     }
   })
 }
+
+router.get("/user/getcaptcha",async ctx=>{
+    const captcha=svgCaptcha.create();
+    //ctx.session.captch=captcha.text;
+    ctx.type="svg";
+    ctx.status=200;
+    ctx.body=captcha.data;
+})
 
 function parseQueryStr( queryStr ) {
   console.log("queryStr is "+queryStr);	
