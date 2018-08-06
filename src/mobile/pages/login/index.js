@@ -63,6 +63,9 @@ class Login extends Component{
                      <label>密码:</label>
                      <input placeholder={"请输入密码"} onChange={(e)=>this.handleInputChange(e,'psw')}/>
                   </div>
+                  <div className={Styles.row}>
+                     <img src={'http://localhost:8099/user/getcaptcha'}/>
+                  </div>
                   <div className={Styles.forgetRow}>
                      <label className={Styles.left} onClick={this.handleRegister}>没有用户？注册</label>
                      <label className={Styles.right} onClick={this.handleResetPsw}>忘记密码</label>
