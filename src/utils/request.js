@@ -30,7 +30,7 @@ function checkStatus(response){
 
 export default function request(url,options){
    const defaultOptions={
-   	  //credentials:'include',
+   	  credentials:'include',
    };
    const newOptions={...defaultOptions,...options};
    console.log("method is "+newOptions.method);
@@ -38,6 +38,7 @@ export default function request(url,options){
    	  newOptions.headers={
    	  	 Accept:'application/json',
    	  	 'Content-Type':'application/x-www-url-encoded;charset=utf-8',
+
    	  	 ...newOptions.headers
    	  };
    	  newOptions.body=JSON.stringify(newOptions.body);

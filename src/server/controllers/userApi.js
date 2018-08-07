@@ -8,7 +8,17 @@ router.post('/user/login',async (ctx,next)=>{
     const postData=await parsePostData(ctx);
     const phoneNum=postData['phonenum'];
     const psw=postData['psw'];
+    const captcha=postData['captcha'];
     console.log("phoneNum is "+phoneNum+" and psw is "+psw);
+    console.log("captcha is "+ctx.session.captcha);
+    if(captcha && captcha!=ctx.session.captcha){
+      ctx.body={
+        message:'验证码错误',
+        result:-1,
+        data:null,
+      };
+      return;
+    }
     await SQL_API.findPerson([phoneNum]).then((res)=>{
       console.log("res is "+JSON.stringify(res));
       if(res && res[0]){
@@ -99,6 +109,8 @@ function parsePostData( ctx ) {
 router.get("/user/getcaptcha",async ctx=>{
     const captcha=svgCaptcha.create();
     //ctx.session.captch=captcha.text;
+    ctx.session.captcha=captcha.text;
+    console.log("get captcha is "+ctx.session.captcha);
     ctx.type="svg";
     ctx.status=200;
     ctx.body=captcha.data;

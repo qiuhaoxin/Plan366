@@ -6,22 +6,33 @@ const bodyparser=require('koa-bodyparser')();
 const logger=require('koa-logger');
 const cors=require('koa2-cors');
 const convert=require('koa-convert');
-
+const session=require('koa-session');
 
 
 // app.use(json())
+app.keys=['qiuhaoxin'];
 app.use(logger())
 app.use(cors({
 	origin:function(ctx){
-       return '*';
+       return 'http://localhost:3008';
 	},
 	exposeHeaders:['WWW-Authenticate','Server-Authorization'],
 	maxAge:5,
-	credentials:true,
+	credentials:true,//credentials
 	allowMethods:['POST','GET','OPTIONS','PUT','DELETE'],
 	allowHeaders:['Content-Type','Authorization','Accept','Content-Length','X-Request-With'],
 }))
-app.use(convert(bodyparser));
+const SESSION_CONFIG={
+	key:'koa:sess',
+	maxAge:86400000,
+	overwrite:true,
+	httpOnly:true,
+	signed:true,
+	rolling:false,
+	renew:false,
+}
+app.use(session(SESSION_CONFIG,app));
+app.use(bodyparser);
 app.use(require('./controllers/userApi').routes());
 
 const PORT=process.env.port || 8099;

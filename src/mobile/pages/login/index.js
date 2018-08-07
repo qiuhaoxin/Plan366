@@ -15,6 +15,7 @@ class Login extends Component{
 	state={
         phonenum:'',
         psw:'',
+        captcha:'',
 	}
 	handleInputChange=(e,key)=>{
        this.setState({
@@ -22,7 +23,7 @@ class Login extends Component{
        })
 	}
   validate=()=>{
-      const {phonenum,psw}=this.state;
+      const {phonenum,psw,captcha}=this.state;
       console.log("phonenum is "+phonenum+" and psw is "+psw);
       if(isEmpty(phonenum)){
         console.log("phonenum is empty！");
@@ -32,15 +33,19 @@ class Login extends Component{
         console.log("psw is empty!");
         return false;
       }
+      if(isEmpty(captcha)){
+        console.log("captcha is empty!");
+        return false;
+      }
       return true;
   }
   handleLogin=(e)=>{
-     const {phonenum,psw}=this.state;
+     const {phonenum,psw,captcha}=this.state;
      const result=this.validate();
      const {loginAPI}=this.props;
      if(!result)return;
      //登录
-     loginAPI({phonenum,psw});
+     loginAPI({phonenum,psw,captcha});
 
   }
   handleRegister=()=>{
@@ -63,8 +68,8 @@ class Login extends Component{
                      <label>密码:</label>
                      <input placeholder={"请输入密码"} onChange={(e)=>this.handleInputChange(e,'psw')}/>
                   </div>
-                  <div className={Styles.row}>
-                     <img src={'http://localhost:8099/user/getcaptcha'}/>
+                  <div className={Styles.row} style={{border:'none'}}>
+                     <input placeholder="请输入验证码" onChange={(e)=>this.handleInputChange(e,'captcha')} /><img style={{width:'200px',height:'80px'}} src={'http://localhost:8099/user/getcaptcha'}/>
                   </div>
                   <div className={Styles.forgetRow}>
                      <label className={Styles.left} onClick={this.handleRegister}>没有用户？注册</label>
