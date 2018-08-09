@@ -2,6 +2,9 @@ const router=require('koa-router')();
 const SQL_API=require('../lib/sql.js');
 const svgCaptcha=require('svg-captcha');
 
+const writeBack=(ctx,params)=>{
+    ctx.body=params;
+}
 //登录
 router.post('/user/login',async (ctx,next)=>{
     console.log("user/login");
@@ -88,6 +91,18 @@ router.post('/user/changePsw',async(ctx,next)=>{
 //修改个人资料
 router.post('/user/changePerson',async(ctx,next)=>{
 
+})
+
+router.post('/user/getPerson',async (ctx,next)=>{
+    const postData=await parsePostData(ctx);
+    const phonenum=postData['phoneNum'];
+    console.log("phonenum is "+phonenum);
+    await SQL_API.findPerson([phonenum]).then(res=>{
+        console.log("res is "+JSON.stringify(res));
+        writeBack(ctx,{message:'获取人员信息成功!',result:1,data:res});
+    }).catch(err=>{
+        writeBack(ctx,{message:err,result:-1,data:null})
+    })
 })
 function parsePostData( ctx ) {
   return new Promise((resolve, reject) => {

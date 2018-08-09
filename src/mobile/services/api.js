@@ -35,4 +35,41 @@ export function forgetPsw(params){
 		method:'POST',
 		body:params,
 	})
+} 
+
+//获取用户信息
+export function getPersonByPhone(params){
+	return request(postUrl+"/user/getPerson",{
+		method:'POST',
+		body:params,
+	})
 }
+
+//编辑用户信息
+export function editPersons(params){
+	return request(postUrl+"/user/editPerson",{
+        method:'POST',
+        body:params,
+	})
+}
+
+
+//获取计划列表
+export function fetchPlanList(params){
+    return request(postUrl+"/dayplan/list",{
+        method:'POST',
+        body:params,
+    })
+}
+
+
+//提交计划
+export function submitPlan(params){
+	return request(postUrl+"/dayplan/submitPlan",{
+		method:'POST',
+		body:params,
+	})
+}
+
+
+

@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
 import PropTypes from 'prop-types';
+import PageView from '../../components/PageView';
 
 class MainPage extends Component{
 	constructor(props){
@@ -8,7 +9,7 @@ class MainPage extends Component{
 	render(){
 		return (
            <div>
-               
+               <PageView />
            </div>
 		)
 	}

@@ -42,6 +42,24 @@ const users=`create table if not exists t_users(
      PRIMARY KEY(FID)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;`;
 
+//创建计划表
+const plan=`create table if not exists t_plan(
+    FID INT NOT NULL AUTO_INCREMENT,
+    FTYPE VARCHAR(20) NOT NULL DEFAULT 'DAY' COMMENT '计划类型',
+    FUSERID INT NOT NULL COMMENT '用户id',
+    FCREATTIME TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    FTITLE VARCHAR(100) COMMENT '计划标题',
+    PRIMARY KEY(FID)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;`;
+
+//计划明细表
+const detial=`create table if not exists t_plan_detial(
+    FID INT NOT NULL AUTO_INCREMENT,
+    FCONTNET TEXT NOT NULL COMMENT '计划内容',
+    FDETIALID INT NOT NULL COMMENT '计划ID',
+    PRIMARY KEY(FID)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8;`;
+
 
 const createTable=(sql)=>{
 	return query(sql,[]);
@@ -50,6 +68,8 @@ const createTable=(sql)=>{
 //建表
 
 createTable(users);
+createTable(plan);
+createTable(detial);
 
 //注册
 exports.register=(value)=>{
@@ -64,7 +84,18 @@ exports.findPerson=(value)=>{
 //删除用户
 exports.delUser=(value)=>{
 	const  _sql=`delete from t_user where FID=${value}`;
+	return query(_sql,value);
 }
+
+//获取计划列表分页
+
+//新增计划
+exports.addPaln=(value)=>{
+	const _sql=`insert into t_users set ? `;
+	return query(_sql,value);
+}
+
+
 
 
 
