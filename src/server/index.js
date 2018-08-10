@@ -34,6 +34,7 @@ const SESSION_CONFIG={
 app.use(session(SESSION_CONFIG,app));
 app.use(bodyparser);
 app.use(require('./controllers/userApi').routes());
+app.use(require('./controllers/Api').routes());
 
 const PORT=process.env.port || 8099;
 const server=http.createServer(app.callback());

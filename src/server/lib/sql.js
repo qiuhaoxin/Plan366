@@ -91,7 +91,13 @@ exports.delUser=(value)=>{
 
 //新增计划
 exports.addPaln=(value)=>{
-	const _sql=`insert into t_users set ? `;
+	const _sql=`insert into t_plan(FTYPE,FUSERID,FTITLE) values(?,?,?) `;
+	return query(_sql,value);
+}
+
+
+exports.addPlanDetial=(value)=>{
+	const _sql=`insert into t_plan_detial(FCONTNET,FDETIALID) values(?,?)`;
 	return query(_sql,value);
 }
 

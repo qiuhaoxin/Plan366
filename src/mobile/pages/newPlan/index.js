@@ -73,7 +73,7 @@ class NewPlan extends Component{
        }
 	}
 	render(){
-		const {title}=this.state;
+		const {title,inputContent}=this.state;
 		return (
            <div className={Styles.wrapper}>
                 <Header midContent={"日计划"}/>
@@ -84,7 +84,7 @@ class NewPlan extends Component{
                      </div>
                      <div className={Styles.row}>
                          <label>计划内容:</label>
-                         <textarea placeholder="请输入不超过200字的计划内容" onKeyUp={this.handleKeyup} onChange={(e)=>this.hanldeInputChange(e,'inputContent')}/>
+                         <textarea placeholder="请输入不超过200字的计划内容" value={inputContent} onKeyUp={this.handleKeyup} onChange={(e)=>this.hanldeInputChange(e,'inputContent')}/>
                      </div>
                      <div style={{display:'inline-flex','justifyContent':'flex-end',width:'100%'}}>
                            <Button styleObj={{width:'120px'}}>重置</Button>
@@ -95,7 +95,7 @@ class NewPlan extends Component{
                      {this.renderPlanList()}
                 </div>
                 <div className={Styles.footer}>
-                     <Button type="primary" onClick={this.handleSubmit}>提交</Button>
+                     <Button type="primary" styleObj={{margin:'0 auto','padding':'18px',display:'inline-flex','justifyContent':'center'}} onClick={this.handleSubmit}>提交</Button>
                 </div>
            </div>
 		)
