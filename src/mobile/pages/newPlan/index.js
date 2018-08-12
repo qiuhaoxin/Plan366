@@ -4,7 +4,7 @@ import Header from '../../components/Header';
 import Styles from './index.less';
 import {withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import {Button} from '@haoxin_qiu/reactwebcomponent';
+import {Button,Tip} from '@haoxin_qiu/reactwebcomponent';
 import {isEmpty,getTime,wrapperFunc,FilterMaxId} from '../../../utils/utils';
 import {SubmitPlanAction} from '../../actions/mainpageAction';
 
@@ -13,20 +13,27 @@ class NewPlan extends Component{
 		super(props);
 		//this.today=getTime('yyyy-MM-dd');
        // console.log("today is "+this.today);
+    this.tipContent="";
 	}
 	state={
 		title:`${this.props.userName}${this.props.today}的日计划`,
 		inputContent:'',
 		planList:[],
+    tipVisible:false,
 	}
 	validateForm=()=>{
         const {inputContent}=this.state;
         if(isEmpty(inputContent)){
             console.log("计划内容不能为空!");
+            this.tipContent="计划内容不能为空!";
+            this.setState({
+              tipVisible:true,
+            })
             return false;
         }
         return true;
 	}
+
 	renderPlanList=()=>{
 		const {planList}=this.state;
 		console.log("planList is "+JSON.stringify(planList));
@@ -53,6 +60,12 @@ class NewPlan extends Component{
        	  inputContent:'',
        })
 	}
+  handleTip=()=>{
+    console.log("sdfsdds");
+    this.setState({
+      tipVisible:false,
+    })
+  }
 	hanldeInputChange=(e,key)=>{
 		const val=e.target.value;
         this.setState({
@@ -97,6 +110,9 @@ class NewPlan extends Component{
                 <div className={Styles.footer}>
                      <Button type="primary" styleObj={{margin:'0 auto','padding':'18px',display:'inline-flex','justifyContent':'center'}} onClick={this.handleSubmit}>提交</Button>
                 </div>
+                <Tip tipContent={this.tipContent} visible={this.state.tipVisible} onHideCallback={this.handleTip}>
+
+                </Tip>
            </div>
 		)
 	}
