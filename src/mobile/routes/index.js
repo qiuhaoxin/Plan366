@@ -8,19 +8,21 @@ const Login=asyncComponent(()=>import('../pages/login/index.js'));
 const About=asyncComponent(()=>import('../pages/about/index.js'));
 const DayPlan=asyncComponent(()=>import('../pages/dayPlan/index.js'));
 const NewPlan=asyncComponent(()=>import('../pages/newPlan/index.js'));
+const PlanType=asyncComponent(()=>import('../pages/planType/index.js'));
+const ChangePSW=asyncComponent(()=>import('../pages/changePsw/index.js'));
 class Router extends Component{
-  
     render(){
     	return (
            <HashRouter>
                <Switch>
                    <Route exact path="/register" component={Register} />
                    <Route exact path="/login" component={Login} />
-                   <Route path="/main" component={MainPage} />
+                   <Route path="/main/:tabName" component={MainPage} />
                    <Route path='/me' component={About}/>
                    <Route path='/dayplan' component={DayPlan} />
-                   <Route path='/newPlan/:type' component={NewPlan}/>
-                   <Redirect to="/main"/>
+                   <Route path="/planType" component={PlanType} />
+                   <Route path='/newPlan/:type' component={NewPlan} />
+                   <Route path="/changePsw" component={ChangePSW}/>
                </Switch>
            </HashRouter>
     	)

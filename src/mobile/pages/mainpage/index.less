@@ -1,0 +1,55 @@
+.wrapper{
+	width:100%;display:flex;flex-direction:column;
+  & .content{
+     margin-top:100px;font-size:30px;
+     & .about{
+         width:100%;display:flex;position:relative;flex-direction:column;
+         & .avator{
+            position:relative;width:100%;padding:20px 0px;border-bottom:1px solid #eee;border-top:1px solid #eee;
+            margin-top:30px;
+            & .rigthArrow{
+               position:absolute;width:40px;height:40px;display:block;right:20px;top:50%;margin-top:-20px;
+               &:before{
+                   content:'';position:absolute;border-left:16px solid #000;border-top:16px solid transparent;border-bottom:16px solid transparent;right:6px;top:0;
+               }
+               &:after{
+                  content:'';position:absolute;border-left:16px solid #fff;border-top:16px solid transparent;border-bottom:16px solid transparent;right:8px;top:0;
+               }
+            }
+         }
+         & .extensiable{
+           margin-top:60px;border-top:1px solid #eee;color:#555;
+           & ul{
+              width:100%;margin:0;padding:0;
+              & li.row{
+                list-style:none;height:44px;padding:20px 30px;border-bottom:1px solid #eee;position:relative;
+                &:before{
+                  content:'';position:absolute;border-left:16px solid #000;border-top:16px solid transparent;border-bottom:16px solid transparent;right:26px;
+                  top:50%;margin-top:-16px;
+                }
+                &:after{
+                  content:'';position:absolute;border-left:16px solid #fff;border-top:16px solid transparent;border-bottom:16px solid transparent;right:28px;
+                  top:50%;margin-top:-16px;
+                }
+              }
+           }
+         }
+         & .logout{
+            margin-top:90px;display:inline-flex;justify-content:center;color:red;border-top:1px solid #eee;border-bottom:1px solid #eee;padding:20px;letter-spacing:2px;
+         }
+     }
+  }
+	& .footer{
+        position:fixed;width:100%;left:0;height:88px;bottom:0;z-index:100;background:#fff;
+        &:before{
+           content:'';position:absolute;top:2px;width:100%;left:0;height:1px;background-color:#eee;
+        }
+        & ul{
+          width:100%;display:inline-flex;height:100%;align-items:center;justify-content:center;
+          padding:0;font-size:20px;margin:0;font-size:32px;
+          & li{
+             list-style:none;width:33.33%;display:inline-flex;justify-content:center;align-items:center;height:100%;
+          }
+        }
+	}
+}
