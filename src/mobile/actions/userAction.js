@@ -1,4 +1,4 @@
-import {register,login,getPersonByPhone,editPersons} from '../services/api';
+import {register,login,getPersonByPhone,editPersons,changePsw} from '../services/api';
 import * as ActionType from './actionTypes';
 console.log("ActionType is "+ActionType.REGISTER);
 //注册
@@ -41,5 +41,13 @@ export const editPersonAction=(payload)=>{
 		if(response && response.result==1){
 			dispath({type:ActionType.EDIT_PERSON,payload:response.data});
 		}
+	}
+}
+
+export const changePswAction=(payload)=>{
+	return async dispath=>{
+		const response=await changePsw(payload);
+		console.log("response is "+JSON.stringify(response));
+        dispath({type:ActionType.CHANGE_PSW,payload:response})
 	}
 }

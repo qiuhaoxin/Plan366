@@ -37,6 +37,14 @@ export function forgetPsw(params){
 	})
 } 
 
+//修改密码
+export function changePsw(params){
+	return request(postUrl+"/user/changePsw",{
+		method:'POST',
+		body:params,
+	})
+}
+
 //获取用户信息
 export function getPersonByPhone(params){
 	return request(postUrl+"/user/getPerson",{

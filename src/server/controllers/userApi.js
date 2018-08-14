@@ -85,7 +85,38 @@ router.get('/user/register',async (ctx,next)=>{
 
 //修改密码
 router.post('/user/changePsw',async(ctx,next)=>{
+    const postData=await parsePostData(ctx);
+    const phoneNum=postData['phoneNum'];
+    const oldPsw=postData['oldPsw'];
+    const newPsw=postData['newPsw'];
+    const rePsw=postData['rePsw'];
 
+    let result=await SQL_API.findPerson([phoneNum]);
+    result=result && result[0];
+    console.log("result is "+JSON.stringify(result));
+    if(result){
+      if(result['FPASSWORD']!=oldPsw){
+        ctx.body={
+          result:-1,
+          message:'密码错误!',
+          data:null,
+        }
+        return;
+      }
+    }
+    await SQL_API.changePsw([newPsw,phoneNum]).then(res=>{
+        ctx.body={
+          result:1,
+          message:'修改密码成功!',
+          data:null,
+        }
+    }).catch(err=>{
+        ctx.body={
+          result:-1,
+          message:err,
+          data:null,
+        }
+    })
 })
 
 //修改个人资料

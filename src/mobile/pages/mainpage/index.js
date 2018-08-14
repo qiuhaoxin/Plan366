@@ -5,8 +5,8 @@ import Styles from './index.less';
 import Header from '../../components/Header';
 import {isEmpty} from '../../../utils/utils';
 import {Image} from '@haoxin_qiu/reactwebcomponent';
-
 import img from '../../../img/haoxin_qiu.jpg';
+import {connect} from 'react-redux';
 
 class MainPage extends Component{
 	constructor(props){
@@ -25,9 +25,10 @@ class MainPage extends Component{
   state={
     headerName:'日计划',
   }
+
   componentDidMount(){
     const {tabName}=this.props.match.params;
-    console.log("tabName is "+tabName);
+    const {userName,phoneNum}=this.props;
   }
   handleFooterItemClick=(item)=>{
       console.log("item is "+JSON.stringify(item));
@@ -107,12 +108,32 @@ class MainPage extends Component{
             {footerStr}
         </ul>
 	}
+  renderHeaderLeft=()=>{
+    return (
+       <div className={Styles.headerLeft}>
+           new
+       </div>
+    )
+  }
+  handleNew=()=>{
+    console.log("hei jump");
+    const {headerName}=this.state;
+    const type=headerName=='日计划' ? 'dayPlan' : 'weekPlan';
+    this.props.history.push("/newPlan/"+type);
+  }
+  renderHeaderRight=()=>{
+    return (
+       <div className={Styles.headerRight} onClick={this.handleNew}>
+           new
+       </div>
+    )
+  }
 	render(){
     const {headerName}=this.state;
     console.log("xx headerName is "+headerName);
 		return (
            <div className={Styles.wrapper}>
-               <Header midContent={headerName}/>
+               <Header leftWrapperVisible={true} rightContent={headerName!='我' ? this.renderHeaderLeft : null} midContent={headerName}/>
                <div className={Styles.content}>
                    {
                       headerName=='日计划' ? this.renderDayPlan() : 
@@ -126,5 +147,21 @@ class MainPage extends Component{
 		)
 	}
 }
+const mapStateToProps=state=>{
+  return {
+      userName:state.user.userName,
+      phoneNum:state.user.phoneNum,
+  }
+}
+const mapDispatchToProps=dispatch=>{
+  return {
 
-export default MainPage;
+
+  }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(MainPage);
+
+/*
+*rightContent={headerName!='我' ? this.renderHeaderLeft : null}
+*/

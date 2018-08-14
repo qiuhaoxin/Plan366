@@ -83,7 +83,13 @@ exports.findPerson=(value)=>{
 }
 //删除用户
 exports.delUser=(value)=>{
-	const  _sql=`delete from t_user where FID=${value}`;
+	const  _sql=`delete from t_users where FID=${value}`;
+	return query(_sql,value);
+}
+
+//修改密码
+exports.changePsw=(value)=>{
+	const _sql=`update t_users set FPASSWORD=? where FMOBILE=?`;
 	return query(_sql,value);
 }
 

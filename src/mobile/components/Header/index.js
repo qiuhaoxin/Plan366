@@ -7,7 +7,10 @@ class Header extends Component{
 	}
     renderLeftWrapper=()=>{
        const {leftWrapperVisible}=this.props;
-       return leftWrapperVisible ?  <div className={Styles.leftContent}><span className={Styles.symbol}></span><span className={Styles.text}>Back</span></div> : null
+       return leftWrapperVisible ?  <div onClick={this.handleLeftClick} className={Styles.leftContent}><span className={Styles.symbol}></span><span className={Styles.text}>Back</span></div> : null
+    }
+    handleLeftClick=()=>{
+    	console.log("click left!");
     }
     renderRightWrapper=()=>{
        
