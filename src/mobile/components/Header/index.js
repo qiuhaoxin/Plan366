@@ -31,7 +31,7 @@ class Header extends Component{
 	           </div>
 	           <div className={Styles.rightWrapper}>
                   {
-                  	rightContent ? rightContent() : this.renderRightWrapper()
+                  	typeof rightContent=='string' ? rightContent : (rightContent ? rightContent() : this.renderRightWrapper())
                   }
 	           </div>
 	       </div>

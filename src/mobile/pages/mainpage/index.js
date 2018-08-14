@@ -133,7 +133,7 @@ class MainPage extends Component{
     console.log("xx headerName is "+headerName);
 		return (
            <div className={Styles.wrapper}>
-               <Header leftWrapperVisible={true} rightContent={headerName!='我' ? this.renderHeaderLeft : null} midContent={headerName}/>
+               <Header leftWrapperVisible={true} rightContent={headerName!='我' ? 'new' : null} midContent={headerName}/>
                <div className={Styles.content}>
                    {
                       headerName=='日计划' ? this.renderDayPlan() : 
