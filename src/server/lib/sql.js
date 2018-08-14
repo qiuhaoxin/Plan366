@@ -60,6 +60,15 @@ const detial=`create table if not exists t_plan_detial(
     PRIMARY KEY(FID)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;`;
 
+//计划类型
+const planType=`create table if not exists t_type(
+    FID INT NOT NULL AUTO_INCREMENT,
+    FName VARCHAR(100) NOT NULL COMMENT '计划名称',
+    FCREATTIME TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
+    FMARK TEXT COMMENT '备注',
+    PRIMARY KEY(FID)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8`;
+
 
 const createTable=(sql)=>{
 	return query(sql,[]);
@@ -70,6 +79,8 @@ const createTable=(sql)=>{
 createTable(users);
 createTable(plan);
 createTable(detial);
+createTable(planType);
+
 
 //注册
 exports.register=(value)=>{

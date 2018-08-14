@@ -10,10 +10,17 @@ class Header extends Component{
        return leftWrapperVisible ?  <div onClick={this.handleLeftClick} className={Styles.leftContent}><span className={Styles.symbol}></span><span className={Styles.text}>Back</span></div> : null
     }
     handleLeftClick=()=>{
-    	console.log("click left!");
+    	
+    	const {leftClick}=this.props;
+    	leftClick && leftClick();
     }
     renderRightWrapper=()=>{
        
+    }
+    handleRightClick=()=>{
+    	console.log("rightClick ");
+        const {rightClick}=this.props;
+        rightClick && rightClick();
     }
 	render(){
 	    const {leftContent,rightContent,midContent}=this.props;
@@ -29,9 +36,9 @@ class Header extends Component{
 	                   typeof midContent=='string' ? midContent : midContent()
 	                }
 	           </div>
-	           <div className={Styles.rightWrapper}>
+	           <div className={Styles.rightWrapper} onClick={this.handleRightClick}>
                   {
-                  	typeof rightContent=='string' ? rightContent : (rightContent ? rightContent() : this.renderRightWrapper())
+                  	rightContent ? (typeof rightContent=='string' ? rightContent : rightContent()): this.renderRightWrapper()
                   }
 	           </div>
 	       </div>

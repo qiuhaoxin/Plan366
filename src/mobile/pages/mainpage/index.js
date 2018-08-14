@@ -29,6 +29,17 @@ class MainPage extends Component{
   componentDidMount(){
     const {tabName}=this.props.match.params;
     const {userName,phoneNum}=this.props;
+    console.log("curFooterItem in did mount is "+this.curFooterItem);
+    //if(isEmpty(this.curFooterItem)){
+      console.log("tabName is "+tabName+" and is "+this.curFooterItem);
+      this.curFooterItem=tabName;
+      let result=this.FooterData.filter(item=>item.FKey==tabName);
+      console.log("reuslt is "+JSON.stringify(result));
+      result=result && result[0];
+      this.setState({
+         headerName:result && result['FName']
+      })
+    //}
   }
   handleFooterItemClick=(item)=>{
       console.log("item is "+JSON.stringify(item));
@@ -93,10 +104,6 @@ class MainPage extends Component{
       )
   }
 	renderFooter=()=>{
-        const {tabName}=this.props.match.params;
-        if(isEmpty(this.curFooterItem)){
-          this.curFooterItem=tabName;
-        }
         const footerStr=this.FooterData.map(item=>{
           let styleObj={
             color:item.FKey==this.curFooterItem ? '#1890ff' : '#555',
@@ -116,7 +123,6 @@ class MainPage extends Component{
     )
   }
   handleNew=()=>{
-    console.log("hei jump");
     const {headerName}=this.state;
     const type=headerName=='日计划' ? 'dayPlan' : 'weekPlan';
     this.props.history.push("/newPlan/"+type);
@@ -128,12 +134,15 @@ class MainPage extends Component{
        </div>
     )
   }
+  handleHeaderRightClick=()=>{
+     this.props.history.push("/newPlan/"+this.curFooterItem);
+  }
 	render(){
     const {headerName}=this.state;
-    console.log("xx headerName is "+headerName);
 		return (
            <div className={Styles.wrapper}>
-               <Header leftWrapperVisible={true} rightContent={headerName!='我' ? 'new' : null} midContent={headerName}/>
+               <Header leftWrapperVisible={true} rightContent={headerName!='我' ? 'new' : null} 
+                  midContent={headerName} rightClick={this.handleHeaderRightClick}/>
                <div className={Styles.content}>
                    {
                       headerName=='日计划' ? this.renderDayPlan() : 
