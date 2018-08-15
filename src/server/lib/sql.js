@@ -61,7 +61,7 @@ const detial=`create table if not exists t_plan_detial(
 )ENGINE=InnoDB DEFAULT CHARSET=utf8;`;
 
 //计划类型
-const planType=`create table if not exists t_type(
+const planType=`create table if not exists t_plantype(
     FID INT NOT NULL AUTO_INCREMENT,
     FName VARCHAR(100) NOT NULL COMMENT '计划名称',
     FCREATTIME TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '创建时间',
@@ -117,6 +117,19 @@ exports.addPlanDetial=(value)=>{
 	const _sql=`insert into t_plan_detial(FCONTNET,FDETIALID) values(?,?)`;
 	return query(_sql,value);
 }
+
+//新增计划类型
+exports.newPlanType=(value)=>{
+	const _sql=`insert into t_plantype(FNAME,FMARK) values(?,?)`;
+	return query(_sql,value);
+}
+
+//获取计划类型列表
+exports.getPlanTypeList=(value)=>{
+	const _sql=`select * from t_plantype order by FCREATTIME limit ?,?`;
+	return query(_sql,value)
+}
+
 
 
 

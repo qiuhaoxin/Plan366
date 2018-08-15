@@ -79,5 +79,21 @@ export function submitPlan(params){
 	})
 }
 
+//新增计划类型
+export function newPlanType(params){
+	return request(postUrl+"/plantype/new",{
+		method:'POST',
+		body:params,
+	})
+}
+
+//获取计划类型列表
+export function getPlanTypeList(params){
+	return request(postUrl+"/plantype/getlist",{
+		method:'POST',
+		body:params,
+	})
+}
+
 
 

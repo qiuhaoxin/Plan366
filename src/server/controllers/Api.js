@@ -32,6 +32,47 @@ router.post('/dayplan/submitPlan',async (ctx,next)=>{
       result:1,
       data:null,
     }
+})
+
+router.post('/plantype/new',async ctx=>{
+     const postData=await parsePostData(ctx);
+     const name=postData['name'];//计划类型名称
+     const mark=postData['mark'];//计划类型备注
+
+     await SQL_API.newPlanType([name,mark]).then(res=>{
+         ctx.body={
+            result:1,
+            message:'新增计划类型成功!',
+            data:null,
+         }
+     }).catch(err=>{
+         ctx.body={
+            result:1,
+            message:'新增计划类型失败:'+err,
+            data:null,
+         }
+     })
+})
+
+router.post("/plantype/getlist",async ctx=>{
+  const postData=await parsePostData(ctx);
+  const pagination=postData['pagination'];
+  const currentPage=pagination.currentPage;
+  const pageSize=pagination.pageSize;
+  const start=(currentPage - 1) * pageSize;
+  await SQL_API.getPlanTypeList([start,pageSize]).then(res=>{
+      ctx.body={
+        result:1,
+        message:'获取计划类型列表成功!',
+        data:{list:res,pagination},
+      }
+  }).catch(err=>{
+      ctx.body={
+        result:-1,
+        message:"获取计划类型列表失败："+err,
+        data:null,
+      }
+  })
 
 })
 function parsePostData( ctx ) {
