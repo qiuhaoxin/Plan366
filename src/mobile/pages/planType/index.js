@@ -14,16 +14,16 @@ class PlanType extends Component{
 		super(props);
 		this.modalTitle="新增计划类型";
 		this.tipContent="";
-        const dataSource=new ListView.DataSource({
-        	rowHasChanged: (row1, row2) => row1 !== row2,
-        })
-	    this.state={
+    const dataSource=new ListView.DataSource({
+        rowHasChanged: (row1, row2) => row1 !== row2,
+    })
+	 this.state={
 			name:'',
 			mark:'',
 			showModal:false,
 			showTip:false,
 			dataSource,
-	    }
+	 }
 	}
 
 	componentDidMount(){
@@ -83,6 +83,11 @@ class PlanType extends Component{
 	handleModalCancel=()=>{
 
 	}
+  renderRows=(item,sectionID,rowID)=>{
+    return (<div>
+            <div>{item.FName}</div>
+      </div>)
+  }
 	render(){
 	   const {name,mark,showModal,showTip,dataSource}=this.state;
 	   console.log("dataSource is "+JSON.stringify(dataSource));	
@@ -94,9 +99,8 @@ class PlanType extends Component{
                   <ListView
                        ref={el => this.lv = el}
                        dataSource={this.state.dataSource}
-                  >
-
-                  </ListView>
+                       renderRow={this.renderRows}
+                  />
                   <Modal visible={showModal} style={{top:'22%'}} title={this.modalTitle}
                      onOk={this.handleModalConfirm}
                      onCancel={this.handleModalCancel}
